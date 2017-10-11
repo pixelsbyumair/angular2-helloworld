@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
+import { PostsService } from '../services/posts.services';
 
 @Component({
 	'selector': 'user',
 	'templateUrl': "../app.component.html",
-	'styleUrls': ['../app.component.css']
+	'styleUrls': ['../app.component.css'],
+	providers: [PostsService]
 })
 
 export class UserComponent {
@@ -18,7 +20,7 @@ export class UserComponent {
   hobbies: string[];
   showHobbies: boolean;
 
-    constructor() {
+    constructor(private postsService: PostsService) {
   	  this.title = 'MY FIRST ANGULAR APP';
 	  this.name = 'John Doe';
 	  this.email = 'abc@example.com';
@@ -30,6 +32,10 @@ export class UserComponent {
 
 	  this.hobbies = ['Movies', 'Football', 'Programming'];
   	  this.showHobbies = false;
+
+  	  this.postsService.getPosts().subscribe(posts => {
+  	  	console.log(posts);
+  	  });
   	}
 
 
